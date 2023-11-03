@@ -1,24 +1,83 @@
 #include "shell.h"
 
 /**
- * _putchar - Writes a character to the standard output.
- * @c: The character to be written.
+ * main - Entry point for the simple shell.
+ * @c: The number of arguments passed to the program (unused).
+ * @env: The environment variables (unused).
  *
- * Return: On success, returns the number of characters written (1).
+ * Return: Always returns 0 to indicate successful execution.
  */
-
-
-int _putchar(char c)
+int main(int c, char **env)
 {
-return (write(1, &c, 1));
-}
+    (void)c;
+    char *safnt_prompt = "safnt_shell$ ";
+    char *buffer = NULL;
+    char *path = NULL; // Initialize path to NULL
+    char *arg[110];
+    char *delimiter = " \n";
+    size_t buffersize = 0;
+    ssize_t number_chars;
+    pid_t C_ID;
+    int stat, i, k, exe;
 
-int safnt_print(char *str)
-{
-int i = 0, count = 0;
-while (str[i])
-{
-count += _putchar(str[i++]);
-}
-return (count);
+    while (1)
+    {
+        if (issaty(0))
+            safnt_print(safnt_prompt);
+        number_chars = getline(&buffer, &buffersize, stdin);
+        if (number_chars == -1)
+        {
+            free(buffer);
+            free(path); // Free path before exiting
+            exit(0);
+        }
+        i = 0;
+        while (buffer[i])
+        {
+            if (buffer[i] == '\n')
+                buffer[i] = 0;
+            i++;
+        }
+        k = 0;
+        arg[k] = strtok(buffer, delimiter);
+        while (arg[k])
+        {
+            arg[++k] = strtok(NULL, delimiter);
+        }
+        arg[k] = NULL;
+        free(path); // Free path before reassigning
+        path = acq_loc(arg[0]);
+        if (path == NULL)
+        {
+            if (builtIn_cmd(arg) != 0)
+            {
+                safnt_print("cd");
+                continue;
+            }
+            else
+                safnt_print("non-existent command\n");
+            continue;
+        }
+        C_ID = Fork();
+        if (C_ID < 0)
+        {
+            safnt_print("failed fork");
+            free(buffer);
+            free(path); // Free path in case of fork failure
+            exit(0);
+        }
+        else if (C_ID == 0)
+        {
+            exe = execve(path, arg, env);
+            if (exe == -1)
+                safnt_print("non-existent command\n");
+            free(path); // Free path in child process
+        }
+        else
+            wait(&stat);
+    }
+    free(path); // Free path before exiting
+    free(buffer);
+
+    return (0);
 }
