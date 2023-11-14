@@ -1,5 +1,5 @@
-this is a group project named 0x16. C - Simple Shell
-the main objectives of this project is to achieve the following :
+This is a group project named 0x16. C - Simple Shell done by two people: Samuel Safo Boateng and Charles Ntim
+The main objectives of this project is to achieve the following :
 
 Who designed and implemented the original Unix operating system
 Who wrote the first version of the UNIX shell
