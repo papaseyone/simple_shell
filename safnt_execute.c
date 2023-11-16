@@ -25,7 +25,8 @@ char *args[128];
 int arg_count = 0;
 
 char *token = strtok((char *)cmd, " ");
-while (token != NULL && arg_count < 127) {
+while (token != NULL && arg_count < 127)
+{
 args[arg_count++] = token;
 token = strtok(NULL, " ");
 }
