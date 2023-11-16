@@ -1,32 +1,29 @@
 #include "shell.h"
 
 /**
- * safnt_readCmd - Reads a command from standard input into a buffer.
- * @cmd: Pointer to the buffer to store the command.
+ * safnt_readCmd - Reads a command from standard input.
+ * @cmd: Pointer to store the command.
  * @size: Size of the buffer.
  *
- * This function reads a command from the standard input using fgets into the
- * buffer pointed to by 'cmd'. It checks for EOF conditions and handles errors.
- * If an EOF is encountered, the function terminates the program with EXIT_SUCCESS.
- * If there's an error while reading input, it displays an error message and
- * terminates the program with EXIT_FAILURE.
- *
- * Return: No explicit return value.
+ * Reads a command from standard input using fgets into 'cmd'.
+ * Handles EOF and input errors, terminating with EXIT_SUCCESS or EXIT_FAILURE.
  */
+
 
 void safnt_readCmd(char *cmd, size_t size)
 {
-if (fget(cmd, size, stdin) == NULL
+if (fgets(cmd, size, stdin) == NULL)
 {
 if (feof(stdin))
 {
-safnt_prnt("\n");
-exit(EXIT_SUCCES);
+safnt_print("\n");
+exit(EXIT_SUCCESS);
 }
 else
 {
 safnt_print("Error while reading input.\n");
-exit(EXIT_SUCCESS);
+exit(EXIT_FAILURE);
+}
 }
 cmd[strcspn(cmd, "\n")] = '\0';
 }

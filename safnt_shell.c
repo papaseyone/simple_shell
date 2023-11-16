@@ -15,8 +15,8 @@ char cmd[132];
 while (true)
 {
 safnt_display_prompt();
-read_cmd(cmd, sizeof(cmd));
-exec_cmd(cmd);
+safnt_readCmd(cmd, sizeof(cmd));
+exec_cmd_prompt(cmd);
 }
 
 return (0);
