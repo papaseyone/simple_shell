@@ -1,18 +1,21 @@
-#ifndef MAIN_H
-#define MAIN_H
-
-#include<stdio.h>
-#include<stdlib.h>
-#include<sys/wait.h>
-#include<unistd.h>
-#include<string.h>
-
-void safnt_strcpy(char *destin, const char *source);
-int _putchar(char c);
-int safnt_print(char *str);
-char *acq_loc(char *arg);
-int builtIn_cmd(char **arg);
-char *loc(char *path, char *arg);
+#ifndef SHELL_H
+#define SHELL_H
 
 
-#endif /* MAIN_H */
+#include <stdio.h>
+#include <unistd.h>
+#include <string.h>
+#include <stdbool.h>
+#include <stdlib.h>
+
+void safnt_print(const char *msg);
+void safnt_display_prompt(void);
+void exec_cmd_prompt(const char *cmd);
+void safnt_readCmd(char *cmd, size_t size);
+
+
+
+
+
+
+#endif /* SHELL_H */
