@@ -13,3 +13,4 @@ void safnt_display_prompt(void)
 {
 safnt_print("sanfnt_shell$ ");
 }
+
