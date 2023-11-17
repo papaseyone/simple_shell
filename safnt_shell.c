@@ -19,15 +19,15 @@ if (fgets(cmd, sizeof(cmd), stdin) == NULL)
 if (feof(stdin))
 {
 safnt_print("\n");
- exit(EXIT_SUCCESS);
- }
+exit(EXIT_SUCCESS);
+}
 else
 {
- safnt_print("Error while reading input.\n");
+safnt_print("Error while reading input.\n");
 exit(EXIT_FAILURE);
 }
 }
-cmd[strcspn(cmd, "\n")] = '\0'; 
+cmd[strcspn(cmd, "\n")] = '\0';
 
 exec_cmd_prompt(cmd);
 }
