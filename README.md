@@ -15,3 +15,5 @@ How does the shell use the PATH to find the programs
 How to execute another program with the execve system call
 How to suspend the execution of a process until one of its children terminates
 What is EOF / “end-of-file”?
+
+5.This is to ensure simple shell is well done to the optimal
